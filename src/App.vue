@@ -1,47 +1,82 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import TwinklingStar from "./components/TwinklingStar.vue";
+import Sakana from "sakana";
+import { computed, onMounted, ref } from "vue";
+import { useWindowSize } from "vue-window-size";
+
+const { width, height } = useWindowSize();
+
+const twinklingStars = computed(() => {
+  const w = width.value;
+  const h = height.value;
+  const stars = [];
+  for (let i = 0; i < 100; i++) {
+    stars.push({
+      left: Math.random() * w,
+      top: Math.random() * h,
+    });
+  }
+  return stars;
+});
+
+onMounted(() => {
+  let x = Sakana.init({
+    el: ".sakana-box", // 启动元素 node 或 选择器
+    scale: 0.9, // 缩放倍数
+    canSwitchCharacter: false, // 允许换角色
+    character: "takina",
+  });
+});
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
   <main>
-    <TheWelcome />
+    <div class="fixed flex-center-both">
+      <div class="sakana-box"></div>
+    </div>
+    <div class="fixed">
+      <TwinklingStar
+        v-for="(star, index) in twinklingStars"
+        :key="index"
+        :style="{
+          left: star.left + 'px',
+          top: star.top + 'px',
+        }"
+      />
+    </div>
   </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+main {
+  width: 100%;
+  height: 100%;
+
+  background-color: #1a1a2e;
+  background-image: linear-gradient(
+    180deg,
+    #1a1a2e 0%,
+    #16213e 33%,
+    #0f3460 66%,
+    #0b6875 100%
+  );
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.flex-center-both {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.sakana-box {
+  position: fixed;
+  bottom: 0;
 }
 </style>

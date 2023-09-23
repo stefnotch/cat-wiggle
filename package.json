@@ -12,7 +12,9 @@
     "deploy": "vue-tsc --noEmit -p tsconfig.app.json --composite false && vite build --base=/cat-wiggle/ && node utils/publish.js"
   },
   "dependencies": {
-    "vue": "^3.3.4"
+    "sakana": "^1.0.8",
+    "vue": "^3.3.4",
+    "vue-window-size": "^2.0.0"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.2",
