@@ -9,11 +9,22 @@ body,
 }
 
 #app .sakana-box .sakana-character[data-character="takina"] {
-  background-image: url(chisato.png);
+  background-image: url(test.png);
 }
 
 #app .sakana-box .sakana-bed {
   background: rgba(137, 137, 137, 0.611) !important;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+}
+
+#app .sakana-box .sakana-bed::after {
+  content: "Nyanyanya!";
+  color: #fff;
+  font-style: italic;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }

@@ -31,10 +31,7 @@ onMounted(() => {
 
 <template>
   <main>
-    <div class="fixed flex-center-both">
-      <div class="sakana-box"></div>
-    </div>
-    <div class="fixed">
+    <div class="fixed no-select">
       <TwinklingStar
         v-for="(star, index) in twinklingStars"
         :key="index"
@@ -43,6 +40,9 @@ onMounted(() => {
           top: star.top + 'px',
         }"
       />
+    </div>
+    <div class="fixed flex-center-both">
+      <div class="sakana-box"></div>
     </div>
   </main>
 </template>
@@ -54,6 +54,9 @@ onMounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
+}
+.no-select {
+  user-select: none;
 }
 main {
   width: 100%;
