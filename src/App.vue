@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TwinklingStar from "./components/TwinklingStar.vue";
 import Sakana from "sakana";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useWindowSize } from "vue-window-size";
 
 const { width, height } = useWindowSize();
@@ -19,11 +19,16 @@ const twinklingStars = computed(() => {
   return stars;
 });
 
+let sakana: any = null;
+
 onMounted(() => {
-  let x = Sakana.init({
+  const slowCat = Math.random() < 0.5;
+  sakana = Sakana.init({
     el: ".sakana-box", // 启动元素 node 或 选择器
-    scale: 0.9, // 缩放倍数
-    canSwitchCharacter: false, // 允许换角色
+    scale: 1.0, // 缩放倍数
+    inertia: slowCat ? 0.005 : 0.01,
+    decay: slowCat ? 0.995 : 0.99,
+    canSwitchCharacter: true, // 允许换角色
     character: "takina",
   });
 });
